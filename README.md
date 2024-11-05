@@ -1,4 +1,4 @@
-# TensorFlow FCNN Hyper Parameter Tuner
+# TensorFlow FCNN Hyperparameter Tuner
 
 This repository provides a versatile function for generating, training, and evaluating Fully Connected Neural Networks (FCNN) with a variety of hyperparameters in TensorFlow. The function enables users to experiment with different model architectures, learning rates, regularization settings, and batch normalization options, making it ideal for hyperparameter tuning and architecture optimization in both classification and regression tasks. Intelligent model skipping is implemented to eliminate configurations likely to underperform, enhancing efficiency.
 
