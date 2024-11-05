@@ -34,6 +34,8 @@ def hyperparam_tuner(X_train, y_train, X_val, y_val, total_outputs, neuron_combi
     '''
     if task != 'classification' and task != 'regression':
       raise Exception("task should be either 'classification' or 'regression'")
+    if lr_decay > 1:
+       raise Exception("lr_decay should must be less than or equal to 1")
     trial_count = 0
     learning_rates = sorted(learning_rates, reverse=True) #Ensuring the learning rates in descending order
     models = []
@@ -91,7 +93,7 @@ def hyperparam_tuner(X_train, y_train, X_val, y_val, total_outputs, neuron_combi
                       model.add(tf.keras.layers.Dense(total_outputs, kernel_regularizer=tf.keras.regularizers.L2(reg_lambda)))
                     else:
                       model.add(tf.keras.layers.Dense(total_outputs))
-                    monitor = ExponentialDecayCallback(decay_factor=lr_decay)
+                    monitor = ExponentialDecayCallback(decay_factor=lr_decay) if lr_decay < 1 else []
                     model.compile(loss=loss_func, optimizer=tf.keras.optimizers.Adam(learning_rate=lr))
                     model.fit(X_train, y_train, callbacks=[monitor], verbose=verbose, epochs=epochs, batch_size=batch_size)
                     val_loss = model.evaluate(X_val, y_val, verbose=0)
@@ -106,6 +108,7 @@ def hyperparam_tuner(X_train, y_train, X_val, y_val, total_outputs, neuron_combi
                         'batch_norm': 'yes' if batch_norm == 1 else 'no',
                         'training_loss': training_loss,
                         'val_loss': val_loss,
+                        'lr_decay': lr_decay,
                         'epochs': epochs
                     })
                     if task == "regression":

@@ -76,6 +76,7 @@ The function returns a sorted list of dictionaries, where each dictionary contai
 - **batch_norm**: Indicates whether batch normalization was applied (`'yes'` or `'no'`).
 - **training_loss**: Training loss for the selected model.
 - **val_loss**: Validation loss for the selected model.
+- **lr_decay**: Learning rate decay coefficient.
 - **val_mape**: Validation mean absolute percentage error (for regression tasks only).
 - **epochs**: Total epochs used during training.
 
@@ -92,6 +93,7 @@ models = hyperparam_tuner(
     loss_func='categorical_crossentropy',
     task='classification',
     learning_rates=[0.01, 0.001],
+    lr_decay=0.95,
     reg_lambdas=[0.01, 0.001],
     epochs=30,
     batch_size=64,
