@@ -38,6 +38,7 @@ def hyperparam_tuner(X_train, y_train, X_val, y_val, total_outputs, neuron_combi
        raise Exception("lr_decay must be less than or equal to 1")
     trial_count = 0
     learning_rates = sorted(learning_rates, reverse=True) #Ensuring the learning rates in descending order
+    reg_lambdas = sorted(reg_lambdas, reverse=True) #Ensuring the regularization coefficients in descending order
     models = []
     neuron_combinations_sum = 0
     for layer in neuron_combinations_array:
