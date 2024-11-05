@@ -104,7 +104,7 @@ models = hyperparam_tuner(
 This configuration generates a series of models based on the specified architectures and hyperparameters, returning only the best-performing models.
 
 ### Results
-![Image](results.png)v>
+![Image](results.png)
 
 
 ## Installation
